@@ -9,10 +9,15 @@ pipeline {
             }
         }
 
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t ha-devops-app:jenkins .'
+            }
+        }
+
         stage('Test') {
             steps {
-                echo 'Code checkout successful!'
-                echo 'Jenkins CI/CD pipeline is working!'
+                echo 'Docker image built successfully!'
             }
         }
     }
