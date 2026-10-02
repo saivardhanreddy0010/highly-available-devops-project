@@ -1,0 +1,9 @@
+{
+  "name": "ha-devops-app",
+  "version": "1.0.0",
+  "description": "Highly Available DevOps Project application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

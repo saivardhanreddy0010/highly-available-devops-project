@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: ha-devops-app
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: ha-devops-app
+
+  template:
+    metadata:
+      labels:
+        app: ha-devops-app
+
+    spec:
+      containers:
+        - name: ha-devops-container
+          image: 286664220478.dkr.ecr.ap-south-1.amazonaws.com/ha-devops-app:1.0
+          ports:
+            - containerPort: 80

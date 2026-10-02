@@ -47,7 +47,8 @@ resource "aws_subnet" "public_1" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.project_name}-public-subnet-1"
+    Name                     = "${var.project_name}-public-subnet-1"
+    "kubernetes.io/role/elb" = "1"
   }
 }
 
@@ -58,7 +59,8 @@ resource "aws_subnet" "public_2" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.project_name}-public-subnet-2"
+    Name                     = "${var.project_name}-public-subnet-2"
+    "kubernetes.io/role/elb" = "1"
   }
 }
 
@@ -72,7 +74,8 @@ resource "aws_subnet" "private_1" {
   availability_zone = var.az_1
 
   tags = {
-    Name = "${var.project_name}-private-subnet-1"
+    Name                              = "${var.project_name}-private-subnet-1"
+    "kubernetes.io/role/internal-elb" = "1"
   }
 }
 
@@ -82,13 +85,10 @@ resource "aws_subnet" "private_2" {
   availability_zone = var.az_2
 
   tags = {
-    Name = "${var.project_name}-private-subnet-2"
+    Name                              = "${var.project_name}-private-subnet-2"
+    "kubernetes.io/role/internal-elb" = "1"
   }
 }
-
-# -------------------------
-# Public Route Table
-# -------------------------
 
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
@@ -126,7 +126,11 @@ resource "aws_eip" "nat" {
 }
 
 # -------------------------
-# NAT Gateway
+# NAT Gateway# -------------------------
+# Public Route Table
+# -------------------------
+
+
 # -------------------------
 
 resource "aws_nat_gateway" "main" {
